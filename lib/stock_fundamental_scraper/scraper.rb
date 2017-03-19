@@ -1,6 +1,7 @@
 require 'mechanize'
 require 'pry'
 require 'stock_fundamental_scraper/kabu_tec'
+require 'stock_fundamental_scraper/rakuten_sec'
 
 module StockFundamentalScraper
 
@@ -11,12 +12,35 @@ module StockFundamentalScraper
   class Scraper
 
     def initialize(stock_code)
+      # 株テクデータ取得用インスタンス
       @kabutec = KabuTec.new(scrape_page("https://www.kabutec.jp/company/fs_#{stock_code}.html"))
+
+      # 楽天証券データ取得用インスタンス
+      @rakuten_sec_pl = RakutenSecPL.new(scrape_page("https://www.trkd-asia.com/rakutensec/quote.jsp?ric=#{stock_code}.T&c=ja&ind=2&fs=1"))
+      ## 同ドメインサイトへのアクセスなので5秒のインターバルをおく
+      sleep(5)
+      @rakuten_sec_bs = RakutenSecBS.new(scrape_page("https://www.trkd-asia.com/rakutensec/quote.jsp?ric=#{stock_code}.T&c=ja&ind=2&fs=2"))
+      ## 同ドメインサイトへのアクセスなので5秒のインターバルをおく
+      sleep(5)
+      @rakuten_sec_cf = RakutenSecCF.new(scrape_page("https://www.trkd-asia.com/rakutensec/quote.jsp?ric=#{stock_code}.T&c=ja&ind=2&fs=3"))
     end
 
     def kabu_tec
       @kabutec
     end
+
+    def rakuten_sec_pl
+      @rakuten_sec_pl.pl
+    end
+
+    def rakuten_sec_bs
+      @rakuten_sec_bs.bs
+    end
+
+    def rakuten_sec_cf
+      @rakuten_sec_cf.cf
+    end
+
 
     private
 

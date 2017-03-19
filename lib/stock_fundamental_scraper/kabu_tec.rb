@@ -1,6 +1,5 @@
 # 株テク提供のデータをスクレイピング
 class KabuTec
-
   def initialize(company_fs)
     @company_fs = company_fs
   end
