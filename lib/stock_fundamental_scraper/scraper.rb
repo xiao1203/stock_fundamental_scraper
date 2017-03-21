@@ -1,5 +1,5 @@
 require 'mechanize'
-require 'pry'
+# require 'pry'
 require 'stock_fundamental_scraper/kabu_tec'
 require 'stock_fundamental_scraper/rakuten_sec'
 require 'stock_fundamental_scraper/kabu_sensor'
