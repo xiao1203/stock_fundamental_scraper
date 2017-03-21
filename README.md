@@ -12,7 +12,7 @@ rubyGemにあげるつもりはありません。<br>
 野良Gemなので使いたかったら落とすか、
 
 ```ruby
-gem 'stock_fundamental_scraper', github: 'mxiao1203/stock_fundamental_scraper'
+gem 'stock_fundamental_scraper', github: 'xiao1203/stock_fundamental_scraper'
 ```
 
 としてください。
