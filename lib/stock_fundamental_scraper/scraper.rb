@@ -15,6 +15,8 @@ module StockFundamentalScraper
                    kabu_sensor: false
     )
 
+      # FIXME proでは全件サポートできるclassとは別に各サイトに特化したclassを用意したようが良いな
+
       if kabu_tec
         # 株テクデータ取得用インスタンス
         @kabutec = KabuTec.new(scrape_page("https://www.kabutec.jp/company/fs_#{stock_code}.html"))
@@ -246,6 +248,10 @@ module StockFundamentalScraper
         if scrape_instance.code == "200"
           break
         end
+      end
+
+      if scrape_instance.nil?
+        # Todo Gemの例外通知を実施
       end
 
       scrape_instance
